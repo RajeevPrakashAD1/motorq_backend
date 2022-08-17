@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const { promisify } = require('util');
-const fs = require('fs');
 
 const RegisteredUser = require('./userSchema');
 // const admin = require('./userSchema');
