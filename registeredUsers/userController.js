@@ -16,20 +16,24 @@ const catchAsync = (fn) => {
 };
 
 exports.createUser = catchAsync(async (req, res, next) => {
-	const newUser = await RegisteredUser.create({
-		name: req.body.name,
-		phoneNumber: req.body.phoneNumber,
-		age: req.body.age,
-		gender: req.body.gender,
-		password: req.body.password
-	});
+	try {
+		const newUser = await RegisteredUser.create({
+			name: req.body.name,
+			phoneNumber: req.body.phoneNumber,
+			age: req.body.age,
+			gender: req.body.gender,
+			password: req.body.password
+		});
 
-	res.status(200).send({
-		status: 'successful',
-		data: {
-			user: newUser
-		}
-	});
+		res.status(200).send({
+			status: '   ',
+			data: {
+				user: newUser
+			}
+		});
+	} catch (err) {
+		res.status(409).send({ status: 'fail', error: err });
+	}
 });
 
 exports.getAllUsers = async (req, res) => {
