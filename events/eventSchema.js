@@ -26,12 +26,20 @@ const eventSchema = new mongoose.Schema({
 		required: true
 	},
 	candidatesAllowed: {
-		type: String,
+		type: Number,
 		required: true
 	},
 	candidatesRegistered: {
-		type: String,
+		type: Number,
 		default: '0'
+	},
+	candidates: {
+		type: Array,
+		default: []
+	},
+	ids: {
+		type: Array,
+		default: []
 	}
 });
 const event = mongoose.model('event', eventSchema);

@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
 		type: String
 	},
 	gender: { type: String },
+	events: {
+		type: Array,
+		default: []
+	},
 	password: { type: String, required: true }
 });
 const RegisteredUser = mongoose.model('RegisteredUser', userSchema);

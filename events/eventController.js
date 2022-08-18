@@ -34,18 +34,49 @@ exports.getAllEvent = async (req, res) => {
 		const allevent = await event.find();
 		res.status(200).send({ status: 'successful', data: allevent });
 	} catch (err) {
-		res.status(500).send({ status: fail, error: err });
+		res.status(500).send({ status: 'fail', error: err });
 	}
 };
 
-// exports.getOneUser = async (req, res) => {
-// 	try {
-// 		const user = await RegisteredUser.findOne({ phoneNumber: req.body.phoneNumber });
-// 		res.status(200).send({ status: 'successful', data: user });
-// 	} catch (err) {
-// 		res.status(500).send({ status: fail, error: err });
-// 	}
-// };
+exports.getOneEvent = async (req, res) => {
+	// console.log(req.body);
+	try {
+		const user = await event.findOne({ eventName: req.body.eventName });
+		res.status(200).send({ status: 'successful', data: user });
+	} catch (err) {
+		res.status(500).send({ status: 'fail', error: err });
+	}
+};
+
+exports.updateEvent = async (req, res) => {
+	console.log(req.body);
+	try {
+		const resp = await event.updateMany(
+			{ eventName: req.body.eventName },
+			{
+				$set: {
+					description: req.body.description,
+					date: req.body.date,
+					startTime: req.body.startTime,
+					endTime: req.body.endTime,
+					candidatesAllowed: req.body.candidatesAllowed
+				}
+			}
+		);
+		res.status(200).send({ status: 'successful', data: resp });
+	} catch (e) {
+		res.status(500).send({ status: 'fail', error: e });
+	}
+};
+
+exports.deleteEvent = async (req, res) => {
+	try {
+		const resp = await event.deleteOne({ eventName: req.body.eventName });
+		res.status(200).send({ status: 'successful', data: resp });
+	} catch (e) {
+		res.status(500).send({ status: 'fail', error: e });
+	}
+};
 
 // exports.loginUser = async (req, res) => {
 // 	//console.log(req.body);
